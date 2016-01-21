@@ -172,11 +172,7 @@ $(LIBS_DIR)/lib/libarpack_Octave64.so: \
 	               LT_SYS_LIBRARY_PATH=$(LIBS_DIR)/lib \
 	               FFLAGS='-fdefault-integer-8' \
 	               LDFLAGS='-L$(LIBS_DIR)/lib' \
-	&& $(MAKE) && $(MAKE) install
-	# move libraries
-	mv -t $(LIBS_DIR)/lib $(LIBS_DIR)/lib64/libarpack_Octave64.a
-	mv -t $(LIBS_DIR)/lib $(LIBS_DIR)/lib64/libarpack_Octave64.so*
-	rm -Rf $(LIBS_DIR)/lib64
+	&& $(MAKE) && $(MAKE) install libdir='$${exec_prefix}/lib'
 
 arpack: $(LIBS_DIR)/lib/libarpack_Octave64.so
 

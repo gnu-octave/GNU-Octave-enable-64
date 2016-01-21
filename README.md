@@ -88,8 +88,8 @@ All required libraries are built according to a similar pattern:
 
 To guarantee the usage of the self compiled libraries, even in presence of
 a system wide installed substitute, the library's
-[SONAME](https://en.wikipedia.org/wiki/Soname) is changed, to force hard
-errors, if "the wrong" library is taken.  Therefore it would even be possible
+[SONAME](https://en.wikipedia.org/wiki/Soname) is changed to enforce a hard
+error if the "wrong" library is taken.  Therefore it would even be possible
 to deploy the self compiled libraries system wide.  For more information on
 shared libraries in common Linux distributions, the the subsection below.
 
