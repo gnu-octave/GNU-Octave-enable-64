@@ -48,7 +48,7 @@ Means, that all other
 [build dependencies](https://www.gnu.org/software/octave/doc/interpreter/Build-Dependencies.html)
 (e.g. libtool, gfortran, ...) are properly installed on the system and, even
 better, building the "usual" Octave development version runs flawless. Building
-this project requires approximately **4 GB** disc space, and **2 hours**,
+this project requires approximately **4 GB** disc space and **2 hours**,
 depending on your system.
 
 Using this Makefile is especially of interest, if one pursues the following
@@ -58,8 +58,14 @@ goals:
 2. No collision with system libraries.
 
 Both abovementioned goals are archived by building and deploying the required
-libraries in an arbitrary directory **ROOT_DIR**.  The internal directory
-structure is:
+libraries in an arbitrary directory **ROOT_DIR**.  This directory can be
+set by calling the Makefile like:
+
+```
+make ROOT_DIR=$HOME/some/path
+```
+
+The internal directory structure relative to *ROOT_DIR* is:
 
 ```
 ROOT_DIR
@@ -76,22 +82,32 @@ ROOT_DIR
      +--  ...
 ```
 
-All required libraries are built according to a similar pattern:
+All required libraries are built according to this pattern:
 
 1. Download the source code
 2. Extract the source code to directory *ROOT_DIR/build*
-3. Do required configurations regarding 64-bit indices
-4. Build the library
-5. Add the suffix "_Octave64" to the library's
-   [SONAME](https://en.wikipedia.org/wiki/Soname)
-6. Deploy the library in *ROOT_DIR/libs/lib*
+3. Configure and build the library (sometimes with ugly hacks)
+  1. Ensure usage of 64-bit indices.
+  2. Ensure the suffix "_Octave64" in the library's
+     [SONAME](https://en.wikipedia.org/wiki/Soname).
+4. Deploy the library in *ROOT_DIR/libs/lib* (sometimes with ugly hacks)
 
 To guarantee the usage of the self compiled libraries, even in presence of
 a system wide installed substitute, the library's
 [SONAME](https://en.wikipedia.org/wiki/Soname) is changed to enforce a hard
 error if the "wrong" library is taken.  Therefore it would even be possible
-to deploy the self compiled libraries system wide.  For more information on
-shared libraries in common Linux distributions, the the subsection below.
+to deploy the self compiled libraries system wide.  The SONAME can be set by
+calling the Makefile like:
+
+```
+make SONAME_SUFFIX=
+make SONAME_SUFFIX=Octave64
+```
+
+The first call leaves the library names unchanged, while the second call adds
+the suffix "_Octave64" to each library, which is the default behavior.  For
+more information on shared libraries in common Linux distributions, see the
+subsection below.
 
 For more information on the topic of building GNU Octave using large indices,
 check the
@@ -113,30 +129,67 @@ For Windows, there is a cross-compiling solution, called
 scratch, thus requires much more disc space and time than this approach.
 
 
-## Shared libraries
+## Shared libraries and debugging techniques
 
 As all of this project deals with the correct treatment of shared libraries, it
-follows a collection of really must read articles regarding this topic:
-
-- [tldp.org](http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html)
-- [yolinux.com](http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html)
+follows a short review on how to work with them and debug their usage.
 
 
-## Debugging
+### Environment variables
 
-Here some useful tools for checking whether the right library was loaded or
-not.  To check the loaded shared libraries, try
+A method to ensure that shared libraries located in a certain folder are found,
+is to export the system environment variable **LD_LIBRARY_PATH**.  In the
+example below, the environment variable gets extended by the path */opt/lib*.
 
 ```
-pmap <PID>
-pldd <PID>
+export LD_LIBRARY_PATH=/opt/lib:$LD_LIBRARY_PATH
+./run-your-program
 ```
 
-where <PID> is the process ID of the current octave. Statically you can use
+Another **very verbose** method to figure out what shared libraries your system
+is actually loading and at which paths your system is looking for them, is
+exporting the system environment variable **LD_DEBUG**:
 
 ```
-ldd src/octave
-readelf -d src/octave
+export LD_DEBUG={files|bindings|libs|versions|help}
+./run-your-program
 ```
 
-to find out the starting shared library dependencies.
+The meaning of the individual values of *LD_DEBUG* can be found in [1] (see
+below).
+
+### Useful tools
+
+Some useful tools for checking the shared library dependencies of a program or
+library or whether the "right" shared library was loaded at runtime by a
+program are:
+
+- [ld](http://linux.die.net/man/1/ld) - The GNU linker
+- [ldd](http://linux.die.net/man/1/ldd) - print shared library dependencies
+- [nm](http://linux.die.net/man/1/nm) - list symbols from object files
+- [objdump](http://linux.die.net/man/1/objdump) - display information from
+  object files
+- [pmap](http://linux.die.net/man/1/pmap) - report memory map of a process
+- [readelf](http://linux.die.net/man/1/readelf) - Displays information about
+  ELF files.
+
+Assume your program binary is called `<PROG>` and at runtime it has the process
+ID `<PID>` (which can for example be found out with `pgrep -l octave`) and a
+shared library of interest is called `<LIB>`, then the commands can be used as
+follows:
+
+```
+ldd        {<PROG>|<LIB>}
+nm -D      {<PROG>|<LIB>}
+objdump    {<PROG>|<LIB>}
+readelf -d {<PROG>|<LIB>}
+pmap       <PID>
+```
+
+To get a further insight into shared libraries, here are some more advanced
+references on this topic:
+
+- [1] http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html
+- [2] http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html
+- [3] http://www.ibm.com/developerworks/library/l-dynamic-libraries
+
