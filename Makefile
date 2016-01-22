@@ -172,7 +172,6 @@ $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).so: \
 	&& grep -R -l "libarpack" \
 	 | xargs sed -i "s/libarpack/libarpack$(_SONAME_SUFFIX)/g"
 	# build and install library
-	rm -f $(LIBS_DIR)/lib64/libarpack$(_SONAME_SUFFIX).*
 	cd $(BUILD_DIR)/arpack \
 	&& ./bootstrap \
 	&& ./configure --prefix=$(LIBS_DIR) \
@@ -182,6 +181,7 @@ $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).so: \
 	               FFLAGS='-fdefault-integer-8' \
 	               LDFLAGS='-L$(LIBS_DIR)/lib' \
 	&& $(MAKE) && $(MAKE) install libdir='$${exec_prefix}/lib'
+	rm -f $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).la
 
 arpack: $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 
