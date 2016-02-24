@@ -22,7 +22,7 @@ In particular, a Makefile is provided containing all necessary information to
 compile
 
 - [OpenBLAS](http://www.openblas.net) (0.2.15),
-- [SuiteSparse](http://www.suitesparse.com) (4.4.7),
+- [SuiteSparse](http://www.suitesparse.com) (4.5.1),
 - [QRUPDATE](http://sourceforge.net/projects/qrupdate) (1.1.2),
 - [ARPACK](https://github.com/opencollab/arpack-ng) (3.3.0), and
 - [GNU Octave](http://www.gnu.org/software/octave/) (development version)
@@ -192,4 +192,3 @@ references on this topic:
 - [1] http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html
 - [2] http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html
 - [3] http://www.ibm.com/developerworks/library/l-dynamic-libraries
-

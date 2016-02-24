@@ -22,6 +22,11 @@ else
 _SONAME_SUFFIX = _$(SONAME_SUFFIX)
 endif
 
+# small helper function to search for a library name pattern to add the
+# SONAME suffix
+fix_soname = grep -R -l '$(2)' $(BUILD_DIR)/$(1) \
+  | xargs sed -i "s/$(2)/$(2)$(_SONAME_SUFFIX)/g"
+
 .PHONY: clean octave-update
 
 all: octave
@@ -66,7 +71,7 @@ openblas: $(LIBS_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
 #
 ################################################################################
 
-SUITESPARSE_VER = 4.4.7
+SUITESPARSE_VER = 4.5.1
 
 $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz:
 	cd $(SRC_CACHE) \
@@ -81,29 +86,22 @@ $(LIBS_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so: \
 	cd $(BUILD_DIR) \
 	&& tar -xf $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz
 	cd $(BUILD_DIR) && mv SuiteSparse suitesparse
-	# fix metis stuff
-	cd $(BUILD_DIR)/suitesparse \
-	&& grep -l -R "^[[:space:]]( cd \$$(METIS_PATH) && \$$(MAKE) )" \
-	 | xargs sed -i "/( cd \$$(METIS_PATH) && \$$(MAKE) )/d"
 	# fix library name
-	cd $(BUILD_DIR)/suitesparse \
-	&& grep -R -l "\$(LIBRARY).so" \
-	 | xargs sed -i "s/\$$(LIBRARY).so/\$$(LIBRARY)$(_SONAME_SUFFIX).so/g"
+	$(call fix_soname,suitesparse,\-lsuitesparseconfig)
+	$(call fix_soname,suitesparse,\-lccolamd)
+	$(call fix_soname,suitesparse,\-lcamd)
 	# build and install library
-	rm -Rf $(LIBS_DIR)/include/suitesparse
-	mkdir -p $(LIBS_DIR)/include/suitesparse
 	cd $(BUILD_DIR)/suitesparse \
-	&& $(MAKE) LAPACK="" \
-	           BLAS="" \
-	           UMFPACK_CONFIG="-DLONGBLAS='long'" \
-	           CHOLMOD_CONFIG="-DLONGBLAS='long' -DNPARTITION" \
-	           SPQR_CONFIG="-DLONGBLAS='long' -DNPARTITION" \
-	           LD_LIBRARY_PATH='$(LIBS_DIR)/lib' \
-	           LIB="-L$(LIBS_DIR)/lib -lopenblas$(_SONAME_SUFFIX) -lm -lrt" \
-	&& $(MAKE) install \
-	           INSTALL_LIB=$(LIBS_DIR)/lib \
-	           INSTALL_INCLUDE=$(LIBS_DIR)/include/suitesparse
-
+	&& $(MAKE) config \
+	           INSTALL=$(LIBS_DIR) \
+	           INSTALL_DOC=/tmp/doc \
+	           LAPACK= \
+	           BLAS=-lopenblas$(_SONAME_SUFFIX) \
+	           UMFPACK_CONFIG=-D'LONGBLAS=long' \
+	           CHOLMOD_CONFIG='-D'LONGBLAS=long' -DNPARTITION' \
+	           SO_PLAIN='$$(LIBRARY)$(_SONAME_SUFFIX).so' \
+	           SO_MAIN='$$(LIBRARY)$(_SONAME_SUFFIX).so.$$(SO_VERSION)' \
+	           SO_TARGET='$$(LIBRARY)$(_SONAME_SUFFIX).so.$$(VERSION)'
 suitesparse: $(LIBS_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so
 
 
@@ -239,4 +237,3 @@ octave: $(SRC_CACHE)/octave \
 
 octave-update: $(SRC_CACHE)/octave
 	cd $(SRC_CACHE)/octave && hg pull && hg update default
-
