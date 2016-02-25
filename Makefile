@@ -49,7 +49,7 @@ $(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip:
 	&& mv v$(OPENBLAS_VER).zip openblas-$(OPENBLAS_VER).zip
 
 $(LIBS_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so: \
-  $(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip
+	$(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip
 	cd $(BUILD_DIR) \
 	&& unzip $(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip \
 	&& mv OpenBLAS-$(OPENBLAS_VER) openblas
@@ -81,8 +81,8 @@ $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz:
 	      suitesparse-$(SUITESPARSE_VER).tar.gz
 
 $(LIBS_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so: \
-  $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz \
-  $(LIBS_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
+	$(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz \
+	$(LIBS_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
 	# unpack sources
 	cd $(BUILD_DIR) \
 	&& tar -xf $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz \
@@ -128,8 +128,8 @@ $(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz:
 	&& wget http://downloads.sourceforge.net/project/qrupdate/qrupdate/1.2/qrupdate-$(QRUPDATE_VER).tar.gz
 
 $(LIBS_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so: \
-  $(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz \
-  $(LIBS_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
+	$(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz \
+	$(LIBS_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
 	# unpack sources
 	cd $(BUILD_DIR) \
 	&& tar -xf $(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz \
@@ -164,8 +164,8 @@ $(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz:
 	&& mv $(ARPACK_VER).tar.gz arpack-$(ARPACK_VER).tar.gz
 
 $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).so: \
-  $(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz \
-  $(LIBS_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
+	$(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz \
+	$(LIBS_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
 	# unpack sources
 	cd $(BUILD_DIR) \
 	&& tar -xf $(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz \
@@ -198,14 +198,15 @@ arpack: $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 
 OCTAVE_VER = 4.1.0+
 
-LDSUITESPARSE = '-lamd$(_SONAME_SUFFIX) \
-                 -lcamd$(_SONAME_SUFFIX) \
-                 -lcolamd$(_SONAME_SUFFIX) \
-                 -lccolamd$(_SONAME_SUFFIX) \
-                 -lcxsparse$(_SONAME_SUFFIX) \
-                 -lumfpack$(_SONAME_SUFFIX) \
-                 -lcholmod$(_SONAME_SUFFIX) \
-                 -lsuitesparseconfig$(_SONAME_SUFFIX)'
+LDSUITESPARSE =
+  '-lamd$(_SONAME_SUFFIX) \
+   -lcamd$(_SONAME_SUFFIX) \
+   -lcolamd$(_SONAME_SUFFIX) \
+   -lccolamd$(_SONAME_SUFFIX) \
+   -lcxsparse$(_SONAME_SUFFIX) \
+   -lumfpack$(_SONAME_SUFFIX) \
+   -lcholmod$(_SONAME_SUFFIX) \
+   -lsuitesparseconfig$(_SONAME_SUFFIX)'
 
 OCTAVE_CONFIG_FLAGS = \
   CPPFLAGS='-I$(LIBS_DIR)/include' \
@@ -236,9 +237,9 @@ $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz:
 
 $(BUILD_DIR)/octave/run-octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz \
 	$(LIBS_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so \
-  $(LIBS_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so \
-  $(LIBS_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so \
-  $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
+	$(LIBS_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so \
+	$(LIBS_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so \
+	$(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 	cd $(BUILD_DIR) \
 	&& tar -xf $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz \
 	&& mv octave-$(OCTAVE_VER) octave
