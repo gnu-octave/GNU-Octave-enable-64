@@ -77,7 +77,6 @@ ROOT_DIR
 |    |-- include   # deployment, like  /usr  or  /usr/local
 |    +-- lib
 +-- source-cache   # location for downloaded library sources
-     |-- octave    # GNU Octave Mercurial repository
      |-- arpack-$(VER).tar.gz
      +--  ...
 ```
