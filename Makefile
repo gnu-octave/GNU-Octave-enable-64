@@ -198,7 +198,7 @@ arpack: $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 
 OCTAVE_VER = 4.1.0+
 
-LDSUITESPARSE =
+LDSUITESPARSE = \
   '-lamd$(_SONAME_SUFFIX) \
    -lcamd$(_SONAME_SUFFIX) \
    -lcolamd$(_SONAME_SUFFIX) \
