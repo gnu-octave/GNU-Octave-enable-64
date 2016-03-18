@@ -245,6 +245,7 @@ $(BUILD_DIR)/octave/run-octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz \
 	&& mv octave-$(OCTAVE_VER) octave
 	export LD_LIBRARY_PATH=$(LIBS_DIR)/lib
 	cd $(BUILD_DIR)/octave \
-	&& ./configure $(OCTAVE_CONFIG_FLAGS) && $(MAKE) && $(MAKE) check
+	&& ./configure $(OCTAVE_CONFIG_FLAGS) && $(MAKE)
+	&& $(MAKE) check LD_LIBRARY_PATH='$(LIBS_DIR)/lib'
 
 octave: $(BUILD_DIR)/octave/run-octave
