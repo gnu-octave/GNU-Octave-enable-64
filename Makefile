@@ -41,7 +41,7 @@ clean:
 #
 ################################################################################
 
-OPENBLAS_VER = 0.2.17
+OPENBLAS_VER = 0.2.18
 
 $(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip:
 	cd $(SRC_CACHE) \
@@ -69,7 +69,7 @@ openblas: $(LIBS_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
 #
 ################################################################################
 
-SUITESPARSE_VER = 4.5.1
+SUITESPARSE_VER = 4.5.2
 
 SUITESPARSE_LIBS = amd camd colamd ccolamd csparse cxsparse cholmod umfpack \
 	spqr klu rbio ldl btf suitesparseconfig
