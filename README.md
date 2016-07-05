@@ -24,7 +24,7 @@ compile
 - [OpenBLAS](http://www.openblas.net) (0.2.18),
 - [SuiteSparse](http://www.suitesparse.com) (4.5.3),
 - [QRUPDATE](http://sourceforge.net/projects/qrupdate) (1.1.2),
-- [ARPACK](https://github.com/opencollab/arpack-ng) (3.3.0), and
+- [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.4.0), and
 - [GNU Octave](http://www.gnu.org/software/octave/) (development version)
 
 using 64-bit indices.  To get a quick overview about the library dependencies,
@@ -35,7 +35,7 @@ libraries below".
 +-------------------------------------------------------+
 |                     GNU Octave                        |
 +-------------+-------------+-------------+-------------+
-|             | SuiteSparse |  QRUPDATE   |   ARPACK    |
+|             | SuiteSparse |  QRUPDATE   |  ARPACK-NG  |
 |             +-------------+-------------+-------------+
 | OpenBLAS                                              |
 +-------------------------------------------------------+
@@ -47,8 +47,8 @@ libraries below".
 Means, that all other
 [build dependencies](https://www.gnu.org/software/octave/doc/interpreter/Build-Dependencies.html)
 (e.g. libtool, gfortran, ...) are properly installed on the system and, even
-better, building the "usual" Octave development version runs flawless. Building
-this project requires approximately **4 GB** disc space and **2 hours**,
+better, building the "usual" Octave development version runs flawless.
+Building this project requires approximately **4 GB** disc space and **1 hour**,
 depending on your system.
 
 Using this Makefile is especially of interest, if one pursues the following
@@ -87,7 +87,7 @@ All required libraries are built according to this pattern:
 2. Extract the source code to directory *ROOT_DIR/build*
 3. Configure and build the library (sometimes with ugly hacks)
   1. Ensure usage of 64-bit indices.
-  2. Ensure the suffix "_Octave64" in the library's
+  2. Ensure the suffix "\_Octave64" in the library's
      [SONAME](https://en.wikipedia.org/wiki/Soname).
 4. Deploy the library in *ROOT_DIR/libs/lib* (sometimes with ugly hacks)
 
@@ -104,7 +104,7 @@ make SONAME_SUFFIX=Octave64
 ```
 
 The first call leaves the library names unchanged, while the second call adds
-the suffix "_Octave64" to each library, which is the default behavior.  For
+the suffix "\_Octave64" to each library, which is the default behavior.  For
 more information on shared libraries in common Linux distributions, see the
 subsection below.
 

@@ -156,7 +156,7 @@ qrupdate: $(LIBS_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so
 #
 ################################################################################
 
-ARPACK_VER = 3.3.0
+ARPACK_VER = 3.4.0
 
 $(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz:
 	cd $(SRC_CACHE) \
@@ -170,19 +170,17 @@ $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).so: \
 	cd $(BUILD_DIR) \
 	&& tar -xf $(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz \
 	&& mv arpack-ng-$(ARPACK_VER) arpack
-	# fix library name
-	$(call fix_soname,arpack,libarpack,libarpack$(_SONAME_SUFFIX))
 	# build and install library
 	cd $(BUILD_DIR)/arpack \
 	&& ./bootstrap \
 	&& ./configure --prefix=$(LIBS_DIR) \
 	               --with-blas='-lopenblas$(_SONAME_SUFFIX)' \
 	               --with-lapack='' \
+	               INTERFACE64=1 \
 	               LT_SYS_LIBRARY_PATH=$(LIBS_DIR)/lib \
-	               FFLAGS='-fdefault-integer-8' \
 	               LDFLAGS='-L$(LIBS_DIR)/lib' \
-	&& $(MAKE) && $(MAKE) install libdir='$${exec_prefix}/lib'
-	rm -f $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).la
+	               LIBSUFFIX='$(_SONAME_SUFFIX)' \
+	&& $(MAKE) check && $(MAKE) install
 
 arpack: $(LIBS_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 
