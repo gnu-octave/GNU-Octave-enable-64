@@ -20,7 +20,7 @@ following commands:
 In particular, a Makefile is provided containing all necessary information to
 compile
 
-- [OpenBLAS](http://www.openblas.net) (0.2.18),
+- [OpenBLAS](http://www.openblas.net) (0.2.19),
 - [SuiteSparse](http://www.suitesparse.com) (4.5.3),
 - [QRUPDATE](http://sourceforge.net/projects/qrupdate) (1.1.2),
 - [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.4.0), and
