@@ -198,7 +198,7 @@ arpack: $(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 #
 ################################################################################
 
-OCTAVE_VER = 4.2.0-rc1
+OCTAVE_VER = 4.2.0-rc2
 
 LDSUITESPARSE = \
   '-lamd$(_SONAME_SUFFIX) \
@@ -233,19 +233,17 @@ OCTAVE_CONFIG_FLAGS = \
   --with-qrupdate='-lqrupdate$(_SONAME_SUFFIX)' \
   --with-arpack='-larpack$(_SONAME_SUFFIX)'
 
-$(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz:
-	$(eval URL := $(shell \
-	curl -L --head http://hydra.nixos.org/job/gnu/octave-default/tarball/latest/download/ \
-	| grep -o 'http\S\+.tar.gz'))
-	cd $(SRC_CACHE) && wget $(URL)
+$(SRC_CACHE)/octave-$(OCTAVE_VER).tar.xz:
+	cd $(SRC_CACHE) \
+	&& wget ftp://alpha.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.xz
 
-$(INSTALL_DIR)/bin/octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz \
+$(INSTALL_DIR)/bin/octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.xz \
 	$(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so \
 	$(INSTALL_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so \
 	$(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so \
 	$(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 	cd $(BUILD_DIR) \
-	&& tar -xf $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz \
+	&& tar -xf $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.xz \
 	&& mv octave-$(OCTAVE_VER) octave
 	cd $(BUILD_DIR)/octave \
 	&& ./configure $(OCTAVE_CONFIG_FLAGS) && $(MAKE) install \
