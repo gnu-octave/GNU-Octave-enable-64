@@ -106,6 +106,9 @@ see the [GNU Octave manual][3] or the [GNU Octave wiki][4].
 This project is greatly inspired by a [blog post by Richard Calaba][7],
 who created one year ahead a [GitHub repository for GNU Octave 3.8][8].
 
+A very similar project to this one is [octave-64-bit-index-builder][9] by
+Mike Miller.  A typical case of "I should have known earlier about it!" ;-)
+
 For Windows, there is a cross-compiling solution, called
 [MXE-Octave](http://wiki.octave.org/MXE).  It compiles all dependencies from
 scratch, thus requires much more disc space and time than this approach.
@@ -167,8 +170,8 @@ To get a further insight into shared libraries, here are some more advanced
 references on this topic:
 
 - [tldp.org][6]
-- [yolinux.com][9]
-- [ibm.com][10]
+- [yolinux.com][10]
+- [ibm.com][11]
 
 
 [1]: https://www.gnu.org/software/octave/
@@ -179,5 +182,6 @@ references on this topic:
 [6]: http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html
 [7]: http://calaba.tumblr.com/post/107087607479/octave-64
 [8]: https://github.com/calaba/octave-3.8.2-enable-64-ubuntu-14.04
-[9]: http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html
-[10]: http://www.ibm.com/developerworks/library/l-dynamic-libraries
+[9]: https://bitbucket.org/mtmiller/octave-64-bit-index-builder
+[10]: http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html
+[11]: http://www.ibm.com/developerworks/library/l-dynamic-libraries
