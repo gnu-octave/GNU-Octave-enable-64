@@ -193,12 +193,11 @@ arpack: $(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 #
 #   GNU Octave  - http://www.gnu.org/software/octave/
 #
-#   Build development version of GNU Octave using --enable-64 and all
-#   requirements.
+#   Build GNU Octave using --enable-64 and all requirements.
 #
 ################################################################################
 
-OCTAVE_VER = 4.2.0-rc4
+OCTAVE_VER = 4.2.0
 
 LDSUITESPARSE = \
   '-lamd$(_SONAME_SUFFIX) \
@@ -235,7 +234,7 @@ OCTAVE_CONFIG_FLAGS = \
 
 $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.lz:
 	cd $(SRC_CACHE) \
-	&& wget ftp://alpha.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.lz
+	&& wget https://ftp.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.lz
 
 $(INSTALL_DIR)/bin/octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.lz \
 	$(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so \
