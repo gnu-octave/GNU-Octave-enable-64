@@ -212,6 +212,7 @@ LDSUITESPARSE = \
 OCTAVE_CONFIG_FLAGS = \
   CPPFLAGS='-I$(INSTALL_DIR)/include' \
   LDFLAGS='-L$(INSTALL_DIR)/lib' \
+  F77_INTEGER_8_FLAG='-fdefault-integer-8' \
   LD_LIBRARY_PATH='$(INSTALL_DIR)/lib' \
   --prefix=$(INSTALL_DIR) \
   --libdir='$(INSTALL_DIR)/lib' \
