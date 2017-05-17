@@ -72,7 +72,7 @@ openblas: $(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
 #
 ################################################################################
 
-SUITESPARSE_VER = 4.5.3
+SUITESPARSE_VER = 4.5.5
 
 SUITESPARSE_LIBS = amd camd colamd ccolamd csparse cxsparse cholmod umfpack \
 	spqr klu rbio ldl btf suitesparseconfig
@@ -159,7 +159,7 @@ qrupdate: $(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so
 #
 ################################################################################
 
-ARPACK_VER = 3.4.0
+ARPACK_VER = 3.5.0
 
 $(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz:
 	cd $(SRC_CACHE) \
