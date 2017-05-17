@@ -141,11 +141,11 @@ $(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so: \
 	$(call fix_soname,qrupdate,libqrupdate,libqrupdate$(_SONAME_SUFFIX))
 	# build and install library
 	cd $(BUILD_DIR)/qrupdate \
-	&& $(MAKE) install \
+	&& $(MAKE) test \
 	           LAPACK="" \
 	           BLAS="-lopenblas$(_SONAME_SUFFIX)" \
 	           FFLAGS="-L$(INSTALL_DIR)/lib -fdefault-integer-8" \
-	           PREFIX=$(INSTALL_DIR)
+	&& $(MAKE) install PREFIX=$(INSTALL_DIR)
 
 qrupdate: $(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so
 
