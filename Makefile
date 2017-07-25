@@ -44,7 +44,7 @@ clean:
 #
 ################################################################################
 
-OPENBLAS_VER = 0.2.19
+OPENBLAS_VER = 0.2.20
 
 $(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip:
 	cd $(SRC_CACHE) \
