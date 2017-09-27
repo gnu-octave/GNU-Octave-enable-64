@@ -1,6 +1,6 @@
 ################################################################################
 ##
-##  Building GNU Octave with --enable-64 on GNU Linux
+##  Building GNU Octave with 64-bit libraries on GNU Linux
 ##
 ################################################################################
 
@@ -47,15 +47,16 @@ clean:
 OPENBLAS_VER = 0.2.20
 
 $(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip:
-	cd $(SRC_CACHE) \
-	&& wget https://github.com/xianyi/OpenBLAS/archive/v$(OPENBLAS_VER).zip \
-	&& mv v$(OPENBLAS_VER).zip openblas-$(OPENBLAS_VER).zip
+	@echo -e "\n>>> Download OpenBLAS <<<\n"
+	cd $(SRC_CACHE) && wget -q \
+	https://github.com/xianyi/OpenBLAS/archive/v$(OPENBLAS_VER).zip \
+	                && mv v$(OPENBLAS_VER).zip $@
 
 $(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so: \
 	$(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip
-	cd $(BUILD_DIR) \
-	&& unzip $(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip \
-	&& mv OpenBLAS-$(OPENBLAS_VER) openblas
+	@echo -e "\n>>> Unzip to $(BUILD_DIR)/openblas <<<\n"
+	cd $(BUILD_DIR) && unzip -q $< \
+	                && mv OpenBLAS-$(OPENBLAS_VER) openblas
 	cd $(BUILD_DIR)/openblas \
 	&& $(MAKE) BINARY=64 INTERFACE64=1 LIBNAMESUFFIX=$(SONAME_SUFFIX) \
 	&& $(MAKE) install PREFIX=$(INSTALL_DIR) LIBNAMESUFFIX=$(SONAME_SUFFIX)
@@ -78,18 +79,17 @@ SUITESPARSE_LIBS = amd camd colamd ccolamd csparse cxsparse cholmod umfpack \
 	spqr klu rbio ldl btf suitesparseconfig
 
 $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz:
-	cd $(SRC_CACHE) \
-	&& wget http://faculty.cse.tamu.edu/davis/SuiteSparse/SuiteSparse-$(SUITESPARSE_VER).tar.gz \
-	&& mv SuiteSparse-$(SUITESPARSE_VER).tar.gz \
-	      suitesparse-$(SUITESPARSE_VER).tar.gz
+	@echo -e "\n>>> Download SuiteSparse <<<\n"
+	cd $(SRC_CACHE) && wget -q \
+	http://faculty.cse.tamu.edu/davis/SuiteSparse/SuiteSparse-$(SUITESPARSE_VER).tar.gz \
+	                && mv SuiteSparse-$(SUITESPARSE_VER).tar.gz $@
 
 $(INSTALL_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so: \
 	$(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz \
 	$(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
-	# unpack sources
-	cd $(BUILD_DIR) \
-	&& tar -xf $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz \
-	&& mv SuiteSparse suitesparse
+	@echo -e "\n>>> Untar to $(BUILD_DIR)/suitesparse <<<\n"
+	cd $(BUILD_DIR) && tar -xf $< \
+	                && mv SuiteSparse suitesparse
 	# fix library names
 	$(foreach l,$(SUITESPARSE_LIBS), \
 		$(call fix_soname,suitesparse,LIBRARY = lib$(l),LIBRARY = lib$(l)$(_SONAME_SUFFIX)))
@@ -127,16 +127,16 @@ suitesparse: $(INSTALL_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so
 QRUPDATE_VER = 1.1.2
 
 $(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz:
-	cd $(SRC_CACHE) \
-	&& wget http://downloads.sourceforge.net/project/qrupdate/qrupdate/1.2/qrupdate-$(QRUPDATE_VER).tar.gz
+	@echo -e "\n>>> Download QRUPDATE <<<\n"
+	cd $(SRC_CACHE) && wget -q \
+	http://downloads.sourceforge.net/project/qrupdate/qrupdate/1.2/qrupdate-$(QRUPDATE_VER).tar.gz
 
 $(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so: \
 	$(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz \
 	$(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
-	# unpack sources
-	cd $(BUILD_DIR) \
-	&& tar -xf $(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz \
-	&& mv qrupdate-$(QRUPDATE_VER) qrupdate
+	@echo -e "\n>>> Untar to $(BUILD_DIR)/qrupdate <<<\n"
+	cd $(BUILD_DIR) && tar -xf $< \
+	                && mv qrupdate-$(QRUPDATE_VER) qrupdate
 	# fix library name
 	$(call fix_soname,qrupdate,libqrupdate,libqrupdate$(_SONAME_SUFFIX))
 	# build and install library
@@ -162,17 +162,17 @@ qrupdate: $(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so
 ARPACK_VER = 3.5.0
 
 $(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz:
-	cd $(SRC_CACHE) \
-	&& wget https://github.com/opencollab/arpack-ng/archive/$(ARPACK_VER).tar.gz \
-	&& mv $(ARPACK_VER).tar.gz arpack-$(ARPACK_VER).tar.gz
+	@echo -e "\n>>> Download ARPACK <<<\n"
+	cd $(SRC_CACHE) && wget -q \
+	https://github.com/opencollab/arpack-ng/archive/$(ARPACK_VER).tar.gz \
+	                && mv $(ARPACK_VER).tar.gz $@
 
 $(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so: \
 	$(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz \
 	$(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
-	# unpack sources
-	cd $(BUILD_DIR) \
-	&& tar -xf $(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz \
-	&& mv arpack-ng-$(ARPACK_VER) arpack
+	@echo -e "\n>>> Untar to $(BUILD_DIR)/arpack <<<\n"
+	cd $(BUILD_DIR) && tar -xf $< \
+	                && mv arpack-ng-$(ARPACK_VER) arpack
 	# build and install library
 	cd $(BUILD_DIR)/arpack \
 	&& ./bootstrap \
@@ -184,7 +184,8 @@ $(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so: \
 	               LT_SYS_LIBRARY_PATH=$(INSTALL_DIR)/lib \
 	               LDFLAGS='-L$(INSTALL_DIR)/lib' \
 	               LIBSUFFIX='$(_SONAME_SUFFIX)' \
-	&& $(MAKE) check && $(MAKE) install
+	&& $(MAKE) check \
+	&& $(MAKE) install
 
 arpack: $(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 
@@ -234,19 +235,27 @@ OCTAVE_CONFIG_FLAGS = \
   --with-arpack='-larpack$(_SONAME_SUFFIX)'
 
 $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.lz:
-	cd $(SRC_CACHE) \
-	&& wget https://ftp.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.lz
+	@echo -e "\n>>> Download GNU Octave <<<\n"
+	cd $(SRC_CACHE) && wget -q \
+	  https://ftp.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.lz
 
 $(INSTALL_DIR)/bin/octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.lz \
 	$(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so \
 	$(INSTALL_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so \
 	$(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so \
 	$(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
-	cd $(BUILD_DIR) \
-	&& tar -xf $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.lz \
-	&& mv octave-$(OCTAVE_VER) octave
-	cd $(BUILD_DIR)/octave \
-	&& ./configure $(OCTAVE_CONFIG_FLAGS) && $(MAKE) install \
-	&& $(MAKE) check LD_LIBRARY_PATH='$(INSTALL_DIR)/lib'
+	@echo -e "\n>>> Untar to $(BUILD_DIR)/octave <<<\n"
+	cd $(BUILD_DIR) && tar -xf $< \
+	                && mv octave-$(OCTAVE_VER) octave
+	@echo -e "\n>>> Octave: configure (1/3) <<<\n"
+	cd $(BUILD_DIR)/octave && ./configure $(OCTAVE_CONFIG_FLAGS)
+	@echo -e "\n>>> Octave: build (2/3) <<<\n"
+	cd $(BUILD_DIR)/octave && $(MAKE) install
+	@echo -e "\n>>> Octave: check (3/3) <<<\n"
+	cd $(BUILD_DIR)/octave && $(MAKE) check \
+	                          LD_LIBRARY_PATH='$(INSTALL_DIR)/lib'
 
 octave: $(INSTALL_DIR)/bin/octave
+	@echo -e "\n\n"
+	@echo -e " >>> Finished building GNU Octave with 64-bit libraries!!! <<<"
+	@echo -e "\n  To start GNU Octave run:\n\n    $<\n\n"
