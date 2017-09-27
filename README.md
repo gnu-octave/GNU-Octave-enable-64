@@ -82,8 +82,8 @@ All required libraries are built according to this pattern:
 1. Download the source code
 2. Extract the source code to directory `ROOT_DIR/build`
 3. Configure and build the library (sometimes with ugly hacks)
-  1. Ensure usage of 64-bit indices.
-  2. Ensure the suffix `_Octave64` in the library's [SONAME][5].
+   1. Ensure usage of 64-bit indices.
+   2. Ensure the suffix `_Octave64` in the library's [SONAME][5].
 4. Deploy the library in `ROOT_DIR/install` (sometimes with ugly hacks)
 
 > **Notice:** For reducing the required disc space to **1 GB**, it is
