@@ -11,8 +11,11 @@ following commands:
 
     git clone https://github.com/siko1056/GNU-Octave-enable-64.git
     cd GNU-Octave-enable-64
-    make
+    make -j2 2>&1 | tee build/build.log
     ./install/bin/octave
+
+In case of any problems, a detailed log of all console output is saved to
+`build/build.log` this way.
 
 
 ## More details
@@ -44,7 +47,7 @@ libraries below".
 Means, that all other [GNU Octave build dependencies][2] (e.g. libtool,
 gfortran, ...) are properly installed on the system and, even better,
 building the "usual" Octave development version runs flawless.  Building
-this project requires approximately **4 GB** disc space and **1 hour**,
+this project requires approximately **5 GB** disc space and **1 hour**,
 depending on your system and the number of parallel jobs `make -j`.
 
 Using this Makefile is especially of interest, if one pursues the following
@@ -54,12 +57,12 @@ goals:
 2. No collision with system libraries.
 
 Both abovementioned goals are archived by building and deploying the required
-libraries in an arbitrary directory **ROOT_DIR**.  This directory can be
+libraries in an arbitrary directory `ROOT_DIR`.  This directory can be
 set by calling the Makefile like:
 
     make ROOT_DIR=$HOME/some/path
 
-The internal directory structure relative to *ROOT_DIR* is:
+The internal directory structure relative to `ROOT_DIR` is:
 
     ROOT_DIR
     |-- build          # local build directory for each library
@@ -82,6 +85,10 @@ All required libraries are built according to this pattern:
   1. Ensure usage of 64-bit indices.
   2. Ensure the suffix `_Octave64` in the library's [SONAME][5].
 4. Deploy the library in `ROOT_DIR/install` (sometimes with ugly hacks)
+
+> **Notice:** For reducing the required disc space to **1 GB**, it is
+> possible to remove the directory `ROOT_DIR/build` entirely after a
+> successfully build of this project.
 
 To guarantee the usage of the self compiled libraries, even in presence of
 a system wide installed substitute, the library's [SONAME][5] is changed to
