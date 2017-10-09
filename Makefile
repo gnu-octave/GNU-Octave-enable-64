@@ -233,12 +233,12 @@ OCTAVE_CONFIG_FLAGS = \
   --with-qrupdate='-lqrupdate$(_SONAME_SUFFIX)' \
   --with-arpack='-larpack$(_SONAME_SUFFIX)'
 
-$(SRC_CACHE)/octave-$(OCTAVE_VER).tar.lz:
+$(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz:
 	@echo -e "\n>>> Download GNU Octave <<<\n"
 	cd $(SRC_CACHE) && wget -q \
-	  https://ftp.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.lz
+	  https://ftp.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.gz
 
-$(INSTALL_DIR)/bin/octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.lz \
+$(INSTALL_DIR)/bin/octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz \
 	$(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so \
 	$(INSTALL_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so \
 	$(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so \
