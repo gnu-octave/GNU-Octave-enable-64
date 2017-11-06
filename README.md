@@ -11,11 +11,11 @@ following commands:
 
     git clone https://github.com/siko1056/GNU-Octave-enable-64.git
     cd GNU-Octave-enable-64
-    make -j2 2>&1 | tee build/build.log
+    make -j2 2>&1 | tee build.log
     ./install/bin/octave
 
 In case of any problems, a detailed log of all console output is saved to
-`build/build.log` this way.
+`build.log` this way.
 
 
 ## More details
@@ -24,7 +24,7 @@ In particular, a Makefile is provided containing all necessary information to
 compile
 
 - [OpenBLAS](http://www.openblas.net) (0.2.20),
-- [SuiteSparse](http://www.suitesparse.com) (4.5.5),
+- [SuiteSparse](http://www.suitesparse.com) (4.5.6),
 - [QRUPDATE](http://sourceforge.net/projects/qrupdate) (1.1.2),
 - [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.5.0), and
 - [GNU Octave][1] (4.3.0+, development version)
@@ -82,8 +82,8 @@ All required libraries are built according to this pattern:
 1. Download the source code
 2. Extract the source code to directory `ROOT_DIR/build`
 3. Configure and build the library (sometimes with ugly hacks)
-  1. Ensure usage of 64-bit indices.
-  2. Ensure the suffix `_Octave64` in the library's [SONAME][5].
+   1. Ensure usage of 64-bit indices.
+   2. Ensure the suffix `_Octave64` in the library's [SONAME][5].
 4. Deploy the library in `ROOT_DIR/install` (sometimes with ugly hacks)
 
 > **Notice:** For reducing the required disc space to **1 GB**, it is
