@@ -11,11 +11,11 @@ following commands:
 
     git clone https://github.com/siko1056/GNU-Octave-enable-64.git
     cd GNU-Octave-enable-64
-    make -j2 2>&1 | tee build/build.log
+    make -j2 2>&1 | tee build.log
     ./install/bin/octave
 
 In case of any problems, a detailed log of all console output is saved to
-`build/build.log` this way.
+`build.log` this way.
 
 
 ## More details
