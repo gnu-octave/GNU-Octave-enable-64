@@ -1,7 +1,8 @@
 # GNU Octave enable-64
 
-This project targets compiling [GNU Octave][1] using 64-bit on
-**Linux systems**.
+This projects purpose is to compile [GNU Octave][1] with some of it's library
+dependencies consistently using 64-bit indices on **Linux systems**.  The
+[GNU Octave manual][3] describes this problem in more detail.
 
 
 ## For quick starters
@@ -25,7 +26,7 @@ compile
 
 - [OpenBLAS](http://www.openblas.net) (0.2.20),
 - [SuiteSparse](http://www.suitesparse.com) (4.5.6),
-- [QRUPDATE](http://sourceforge.net/projects/qrupdate) (1.1.2),
+- [QRUPDATE](https://sourceforge.net/projects/qrupdate/) (1.1.2),
 - [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.5.0), and
 - [GNU Octave][1] (4.2.1)
 
@@ -114,10 +115,11 @@ This project is greatly inspired by a [blog post by Richard Calaba][7],
 who created one year ahead a [GitHub repository for GNU Octave 3.8][8].
 
 A very similar project to this one is [octave-64-bit-index-builder][9] by
-Mike Miller.  A typical case of "I should have known earlier about it!" ;-)
+Mike Miller.  A typical case of "I should have known earlier about it!"
+:wink:
 
 For Windows, there is a cross-compiling solution, called
-[MXE-Octave](http://wiki.octave.org/MXE).  It compiles all dependencies from
+[MXE-Octave](https://wiki.octave.org/MXE).  It compiles all dependencies from
 scratch, thus requires much more disc space and time than this approach.
 
 
