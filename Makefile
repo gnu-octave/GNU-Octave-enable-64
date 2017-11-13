@@ -126,6 +126,12 @@ suitesparse: $(INSTALL_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so
 
 QRUPDATE_VER = 1.1.2
 
+QRUPDATE_CONFIG_FLAGS = \
+  PREFIX=$(INSTALL_DIR) \
+  LAPACK="" \
+  BLAS="-lopenblas$(_SONAME_SUFFIX)" \
+  FFLAGS="-L$(INSTALL_DIR)/lib -fdefault-integer-8"
+
 $(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz:
 	@echo -e "\n>>> Download QRUPDATE <<<\n"
 	cd $(SRC_CACHE) && wget -q \
@@ -141,11 +147,8 @@ $(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so: \
 	$(call fix_soname,qrupdate,libqrupdate,libqrupdate$(_SONAME_SUFFIX))
 	# build and install library
 	cd $(BUILD_DIR)/qrupdate \
-	&& $(MAKE) test \
-	           LAPACK="" \
-	           BLAS="-lopenblas$(_SONAME_SUFFIX)" \
-	           FFLAGS="-L$(INSTALL_DIR)/lib -fdefault-integer-8" \
-	&& $(MAKE) install PREFIX=$(INSTALL_DIR)
+	&& $(MAKE) test    $(QRUPDATE_CONFIG_FLAGS) \
+	&& $(MAKE) install $(QRUPDATE_CONFIG_FLAGS)
 
 qrupdate: $(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so
 
