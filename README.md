@@ -25,7 +25,7 @@ In particular, a Makefile is provided containing all necessary information to
 compile
 
 - [OpenBLAS](http://www.openblas.net) (0.2.20),
-- [SuiteSparse](http://www.suitesparse.com) (4.5.6),
+- [SuiteSparse](http://www.suitesparse.com) (5.0.0),
 - [QRUPDATE](https://sourceforge.net/projects/qrupdate/) (1.1.2),
 - [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.5.0), and
 - [GNU Octave][1] (4.2.1)
