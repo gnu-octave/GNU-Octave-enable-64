@@ -215,9 +215,10 @@ LDSUITESPARSE = \
    -lcamd$(_SONAME_SUFFIX) \
    -lcolamd$(_SONAME_SUFFIX) \
    -lccolamd$(_SONAME_SUFFIX) \
-   -lcxsparse$(_SONAME_SUFFIX) \
-   -lumfpack$(_SONAME_SUFFIX) \
    -lcholmod$(_SONAME_SUFFIX) \
+   -lcxsparse$(_SONAME_SUFFIX) \
+   -lklu$(_SONAME_SUFFIX) \
+   -lumfpack$(_SONAME_SUFFIX) \
    -lsuitesparseconfig$(_SONAME_SUFFIX)'
 
 OCTAVE_CONFIG_FLAGS = \
@@ -229,6 +230,7 @@ OCTAVE_CONFIG_FLAGS = \
   --libdir='$(INSTALL_DIR)/lib' \
   --enable-64 \
   --with-blas='-lopenblas$(_SONAME_SUFFIX)' \
+  --with-suitesparseconfig='-lsuitesparseconfig$(_SONAME_SUFFIX)' \
   --with-amd='-lamd$(_SONAME_SUFFIX) \
               -lsuitesparseconfig$(_SONAME_SUFFIX)' \
   --with-camd='-lcamd$(_SONAME_SUFFIX) \
@@ -239,6 +241,7 @@ OCTAVE_CONFIG_FLAGS = \
                   -lsuitesparseconfig$(_SONAME_SUFFIX)' \
   --with-cxsparse='-lcxsparse$(_SONAME_SUFFIX) \
                    -lsuitesparseconfig$(_SONAME_SUFFIX)' \
+  --with-klu=$(LDSUITESPARSE) \
   --with-cholmod=$(LDSUITESPARSE) \
   --with-umfpack=$(LDSUITESPARSE) \
   --with-qrupdate='-lqrupdate$(_SONAME_SUFFIX)' \
