@@ -10,10 +10,10 @@ SONAME_SUFFIX ?= Octave64
 ROOT_DIR      ?= ${PWD}
 
 # create necessary file structure
-SRC_CACHE = $(ROOT_DIR)/source-cache
-BUILD_DIR = $(ROOT_DIR)/build
-INSTALL_DIR  = $(ROOT_DIR)/install
-LD_LIBRARY_PATH=$(INSTALL_DIR)/lib
+SRC_CACHE       = $(ROOT_DIR)/source-cache
+BUILD_DIR       = $(ROOT_DIR)/build
+INSTALL_DIR     = $(ROOT_DIR)/install
+LD_LIBRARY_PATH = $(INSTALL_DIR)/lib
 IGNORE := $(shell mkdir -p $(SRC_CACHE) $(BUILD_DIR) $(INSTALL_DIR))
 
 # if no SONAME suffix is wanted, leave everything blank
