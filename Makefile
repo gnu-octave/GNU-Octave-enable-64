@@ -9,6 +9,12 @@ SONAME_SUFFIX ?= Octave64
 # specify root directory (default: current directory)
 ROOT_DIR      ?= ${PWD}
 
+# define GNU compiler suite version 7 as default
+override CC  = gcc-7
+override CXX = g++-7
+override F77 = gfortran-7
+override FC  = gfortran-7
+
 # create necessary file structure
 SRC_CACHE       = $(ROOT_DIR)/source-cache
 BUILD_DIR       = $(ROOT_DIR)/build
@@ -143,8 +149,9 @@ $(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so: \
 	@echo -e "\n>>> Untar to $(BUILD_DIR)/qrupdate <<<\n"
 	cd $(BUILD_DIR) && tar -xf $< \
 	                && mv qrupdate-$(QRUPDATE_VER) qrupdate
-	# fix library name
+	# fix library name and used fortran compiler
 	$(call fix_soname,qrupdate,libqrupdate,libqrupdate$(_SONAME_SUFFIX))
+	sed -i "s/FC=.*/FC=$(FC)/g" $(BUILD_DIR)/qrupdate/Makeconf
 	# build and install library
 	cd $(BUILD_DIR)/qrupdate \
 	&& $(MAKE) test    $(QRUPDATE_CONFIG_FLAGS) \
