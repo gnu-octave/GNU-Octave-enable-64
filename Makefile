@@ -49,7 +49,7 @@ OPENBLAS_VER = 0.2.20
 $(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip:
 	@echo -e "\n>>> Download OpenBLAS <<<\n"
 	cd $(SRC_CACHE) && wget -q \
-	https://github.com/xianyi/OpenBLAS/archive/v$(OPENBLAS_VER).zip \
+	"https://github.com/xianyi/OpenBLAS/archive/v$(OPENBLAS_VER).zip" \
 	                && mv v$(OPENBLAS_VER).zip $@
 
 $(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so: \
@@ -81,7 +81,7 @@ SUITESPARSE_LIBS = amd camd colamd ccolamd csparse cxsparse cholmod umfpack \
 $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz:
 	@echo -e "\n>>> Download SuiteSparse <<<\n"
 	cd $(SRC_CACHE) && wget -q \
-	http://faculty.cse.tamu.edu/davis/SuiteSparse/SuiteSparse-$(SUITESPARSE_VER).tar.gz \
+	"http://faculty.cse.tamu.edu/davis/SuiteSparse/SuiteSparse-$(SUITESPARSE_VER).tar.gz" \
 	                && mv SuiteSparse-$(SUITESPARSE_VER).tar.gz $@
 
 $(INSTALL_DIR)/lib/libsuitesparseconfig$(_SONAME_SUFFIX).so: \
@@ -136,7 +136,7 @@ QRUPDATE_CONFIG_FLAGS = \
 $(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz:
 	@echo -e "\n>>> Download QRUPDATE <<<\n"
 	cd $(SRC_CACHE) && wget -q \
-	http://downloads.sourceforge.net/project/qrupdate/qrupdate/1.2/qrupdate-$(QRUPDATE_VER).tar.gz
+	"http://downloads.sourceforge.net/project/qrupdate/qrupdate/1.2/qrupdate-$(QRUPDATE_VER).tar.gz"
 
 $(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so: \
 	$(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz \
@@ -168,7 +168,7 @@ ARPACK_VER = 3.5.0
 $(SRC_CACHE)/arpack-$(ARPACK_VER).tar.gz:
 	@echo -e "\n>>> Download ARPACK <<<\n"
 	cd $(SRC_CACHE) && wget -q \
-	https://github.com/opencollab/arpack-ng/archive/$(ARPACK_VER).tar.gz \
+	"https://github.com/opencollab/arpack-ng/archive/$(ARPACK_VER).tar.gz" \
 	                && mv $(ARPACK_VER).tar.gz $@
 
 $(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so: \
@@ -240,7 +240,7 @@ OCTAVE_CONFIG_FLAGS = \
 $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz:
 	@echo -e "\n>>> Download GNU Octave <<<\n"
 	cd $(SRC_CACHE) && wget -q \
-	  https://ftp.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.gz
+	  "https://ftp.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.gz"
 
 $(INSTALL_DIR)/bin/octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz \
 	$(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so \
