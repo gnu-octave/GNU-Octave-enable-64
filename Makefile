@@ -73,7 +73,7 @@ openblas: $(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so
 #
 ################################################################################
 
-SUITESPARSE_VER = 5.1.2
+SUITESPARSE_VER = 6.0.0
 
 SUITESPARSE_LIBS = amd camd colamd ccolamd csparse cxsparse cholmod umfpack \
 	spqr klu rbio ldl btf suitesparseconfig
@@ -202,7 +202,7 @@ arpack: $(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 #
 ################################################################################
 
-OCTAVE_VER = 4.2.1
+OCTAVE_VER = 4.2.2
 
 LDSUITESPARSE = \
   '-lamd$(_SONAME_SUFFIX) \
