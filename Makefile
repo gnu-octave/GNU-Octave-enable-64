@@ -209,7 +209,7 @@ arpack: $(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 #
 ################################################################################
 
-OCTAVE_VER = 4.3.0+
+OCTAVE_VER = 4.5.0+
 
 LDSUITESPARSE = \
   '-lamd$(_SONAME_SUFFIX) \
@@ -251,7 +251,7 @@ OCTAVE_CONFIG_FLAGS = \
 $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz:
 	@echo -e "\n>>> Download GNU Octave <<<\n"
 	cd $(SRC_CACHE) && wget -q \
-	  http://octave.space/latest/octave-$(OCTAVE_VER).tar.gz
+	  "http://octave.space/latest/octave-$(OCTAVE_VER).tar.gz"
 
 $(INSTALL_DIR)/bin/octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz \
 	$(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so \
