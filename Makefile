@@ -209,7 +209,7 @@ arpack: $(INSTALL_DIR)/lib/libarpack$(_SONAME_SUFFIX).so
 #
 ################################################################################
 
-OCTAVE_VER = 4.5.0+
+OCTAVE_VER = 4.3.0+
 
 LDSUITESPARSE = \
   '-lamd$(_SONAME_SUFFIX) \
