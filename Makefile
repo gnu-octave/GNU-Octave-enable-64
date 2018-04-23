@@ -9,12 +9,6 @@ SONAME_SUFFIX ?= Octave64
 # specify root directory (default: current directory)
 ROOT_DIR      ?= ${PWD}
 
-# define GNU compiler suite version 7 as default
-override CC  = gcc-7
-override CXX = g++-7
-override F77 = gfortran-7
-override FC  = gfortran-7
-
 # create necessary file structure
 SRC_CACHE       = $(ROOT_DIR)/source-cache
 BUILD_DIR       = $(ROOT_DIR)/build
