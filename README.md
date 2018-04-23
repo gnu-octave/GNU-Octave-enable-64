@@ -28,7 +28,7 @@ compile
 - [SuiteSparse](http://www.suitesparse.com) (5.2.0),
 - [QRUPDATE](https://sourceforge.net/projects/qrupdate/) (1.1.2),
 - [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.5.0), and
-- [GNU Octave][1] (4.3.0+, latest stable version)
+- [GNU Octave][1] (4.3.91, latest stable version)
 
 using 64-bit indices.  To get a quick overview about the library dependencies,
 the following figure visualizes them top-down:  "The above requires all
@@ -184,13 +184,13 @@ references on this topic:
 
 
 [1]: https://www.gnu.org/software/octave/
-[2]: https://www.gnu.org/software/octave/doc/interpreter/Build-Dependencies.html
-[3]: https://www.gnu.org/software/octave/doc/interpreter/Compiling-Octave-with-64_002dbit-Indexing.html
-[4]: http://wiki.octave.org/Enable_large_arrays:_Build_octave_such_that_it_can_use_arrays_larger_than_2Gb.
+[2]: https://octave.org/doc/interpreter/Build-Dependencies.html
+[3]: https://octave.org/doc/interpreter/Compiling-Octave-with-64_002dbit-Indexing.html
+[4]: https://wiki.octave.org/Enable_large_arrays:_Build_octave_such_that_it_can_use_arrays_larger_than_2Gb.
 [5]: https://en.wikipedia.org/wiki/Soname
 [6]: http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html
 [7]: http://calaba.tumblr.com/post/107087607479/octave-64
 [8]: https://github.com/calaba/octave-3.8.2-enable-64-ubuntu-14.04
 [9]: https://bitbucket.org/mtmiller/octave-64-bit-index-builder
 [10]: http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html
-[11]: http://www.ibm.com/developerworks/library/l-dynamic-libraries
+[11]: https://www.ibm.com/developerworks/library/l-dynamic-libraries/
