@@ -10,7 +10,7 @@ dependencies consistently using 64-bit indices on **Linux systems**.  The
 If all [GNU Octave build dependencies][2] are installed, just type the
 following commands:
 
-    git clone https://github.com/siko1056/GNU-Octave-enable-64.git
+    git clone https://github.com/octave-de/GNU-Octave-enable-64.git
     cd GNU-Octave-enable-64
     make -j2 2>&1 | tee build.log
     ./install/bin/octave
