@@ -245,7 +245,7 @@ OCTAVE_CONFIG_FLAGS = \
 $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz:
 	@echo -e "\n>>> Download GNU Octave <<<\n"
 	cd $(SRC_CACHE) && wget -q \
-	  "https://alpha.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.gz"
+	  "https://ftp.gnu.org/gnu/octave/octave-$(OCTAVE_VER).tar.gz"
 
 $(INSTALL_DIR)/bin/octave: $(SRC_CACHE)/octave-$(OCTAVE_VER).tar.gz \
 	$(INSTALL_DIR)/lib/libopenblas$(_SONAME_SUFFIX).so \
