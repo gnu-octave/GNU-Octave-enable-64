@@ -144,9 +144,8 @@ $(INSTALL_DIR)/lib/libqrupdate$(_SONAME_SUFFIX).so: \
 	@echo -e "\n>>> Untar to $(BUILD_DIR)/qrupdate <<<\n"
 	cd $(BUILD_DIR) && tar -xf $< \
 	                && mv qrupdate-$(QRUPDATE_VER) qrupdate
-	# fix library name and used fortran compiler
+	# fix library name
 	$(call fix_soname,qrupdate,libqrupdate,libqrupdate$(_SONAME_SUFFIX))
-	sed -i "s/FC=.*/FC=$(FC)/g" $(BUILD_DIR)/qrupdate/Makeconf
 	# build and install library
 	cd $(BUILD_DIR)/qrupdate \
 	&& $(MAKE) test    $(QRUPDATE_CONFIG_FLAGS) \
