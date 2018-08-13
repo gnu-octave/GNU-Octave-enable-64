@@ -28,7 +28,7 @@ compile
 - [SuiteSparse](http://www.suitesparse.com) (5.3.0),
 - [QRUPDATE](https://sourceforge.net/projects/qrupdate/) (1.1.2),
 - [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.5.0), and
-- [GNU Octave][1] (4.4.0)
+- [GNU Octave][1] (4.4.1)
 
 using 64-bit indices.  To get a quick overview about the library dependencies,
 the following figure visualizes them top-down:  "The above requires all
