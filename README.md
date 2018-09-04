@@ -24,7 +24,7 @@ In case of any problems, a detailed log of all console output is saved to
 In particular, a Makefile is provided containing all necessary information to
 compile
 
-- [OpenBLAS](http://www.openblas.net) (0.3.0),
+- [OpenBLAS](http://www.openblas.net) (0.3.3),
 - [SuiteSparse](http://www.suitesparse.com) (5.3.0),
 - [QRUPDATE](https://sourceforge.net/projects/qrupdate/) (1.1.2),
 - [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.5.0), and

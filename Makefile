@@ -44,7 +44,7 @@ clean:
 #
 ################################################################################
 
-OPENBLAS_VER = 0.3.0
+OPENBLAS_VER = 0.3.3
 
 $(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip:
 	@echo -e "\n>>> Download OpenBLAS <<<\n"
