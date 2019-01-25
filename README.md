@@ -24,11 +24,11 @@ In case of any problems, a detailed log of all console output is saved to
 In particular, a Makefile is provided containing all necessary information to
 compile
 
-- [OpenBLAS](http://www.openblas.net) (0.3.4),
-- [SuiteSparse](http://www.suitesparse.com) (5.4.0),
+- [OpenBLAS](http://www.openblas.net) (0.3.5),
+- [SuiteSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) (5.4.0),
 - [QRUPDATE](https://sourceforge.net/projects/qrupdate/) (1.1.2),
-- [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.6.3), and
-- [GNU Octave][1] (4.4.1)
+- [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.7.0), and
+- [GNU Octave][1] (5.0.90)
 
 using 64-bit indices.  To get a quick overview about the library dependencies,
 the following figure visualizes them top-down:  "The above requires all
