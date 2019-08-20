@@ -12,11 +12,11 @@ following commands:
 
     git clone https://github.com/octave-de/GNU-Octave-enable-64.git
     cd GNU-Octave-enable-64
-    make -j2 2>&1 | tee build.log
+    make -j2 2>&1 | tee log/build.log
     ./install/bin/octave
 
 In case of any problems, a detailed log of all console output is saved to
-`build.log` this way.
+`log/build.log` this way.
 
 
 ## More details
@@ -24,7 +24,7 @@ In case of any problems, a detailed log of all console output is saved to
 In particular, a Makefile is provided containing all necessary information to
 compile
 
-- [OpenBLAS](http://www.openblas.net) (0.3.6),
+- [OpenBLAS](http://www.openblas.net) (0.3.7),
 - [SuiteSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) (5.4.0),
 - [QRUPDATE](https://sourceforge.net/projects/qrupdate/) (1.1.2),
 - [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.7.0), and
@@ -57,7 +57,7 @@ goals:
 1. No root privileges required.
 2. No collision with system libraries.
 
-Both abovementioned goals are archived by building and deploying the required
+Both aforementioned goals are archived by building and deploying the required
 libraries in an arbitrary directory `ROOT_DIR`.  This directory can be
 set by calling the Makefile like:
 
@@ -80,30 +80,14 @@ The internal directory structure relative to `ROOT_DIR` is:
 
 All required libraries are built according to this pattern:
 
-1. Download the source code
-2. Extract the source code to directory `ROOT_DIR/build`
-3. Configure and build the library (sometimes with ugly hacks)
-   1. Ensure usage of 64-bit indices.
-   2. Ensure the suffix `_Octave64` in the library's [SONAME][5].
-4. Deploy the library in `ROOT_DIR/install` (sometimes with ugly hacks)
+1. Download the source code archive
+2. Extract the source code archive to the directory `ROOT_DIR/build`
+3. Configure and build the library ensuring 64-bit indices
+4. Deploy the library in `ROOT_DIR/install`
 
 > **Notice:** For reducing the required disc space to **1 GB**, it is
 > possible to remove the directory `ROOT_DIR/build` entirely after a
 > successfully build of this project.
-
-To guarantee the usage of the self compiled libraries, even in presence of
-a system wide installed substitute, the library's [SONAME][5] is changed to
-enforce a hard error if the "wrong" library is taken.  Therefore it would
-even be possible to deploy the self compiled libraries system wide.  The
-[SONAME][5] can be set by calling the Makefile like:
-
-    make SONAME_SUFFIX=
-    make SONAME_SUFFIX=Octave64
-
-The first call leaves the library names unchanged, while the second call adds
-the suffix `_Octave64` to each library, which is the default behavior.  For
-more information on shared libraries in common Linux distributions, see the
-subsection below.
 
 For more information on the topic of building GNU Octave using large indices,
 see the [GNU Octave manual][3] or the [GNU Octave wiki][4].
@@ -118,7 +102,7 @@ A very similar project to this one is [octave-64-bit-index-builder][9] by
 Mike Miller.  A typical case of "I should have known earlier about it!"
 :wink:
 
-For Windows, there is a cross-compiling solution, called
+There is a cross-compiling solution, called
 [MXE-Octave](https://wiki.octave.org/MXE).  It compiles all dependencies from
 scratch, thus requires much more disc space and time than this approach.
 
