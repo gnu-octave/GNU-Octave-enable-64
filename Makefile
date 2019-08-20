@@ -8,9 +8,10 @@
 ROOT_DIR ?= ${PWD}
 
 # create necessary file structure
-SRC_CACHE       = $(ROOT_DIR)/source-cache
-BUILD_DIR       = $(ROOT_DIR)/build
-INSTALL_DIR     = $(ROOT_DIR)/install
+SRC_CACHE   ?= $(ROOT_DIR)/source-cache
+BUILD_DIR   ?= $(ROOT_DIR)/build
+INSTALL_DIR ?= $(ROOT_DIR)/install
+
 LD_LIBRARY_PATH = $(INSTALL_DIR)/lib
 IGNORE := $(shell mkdir -p $(SRC_CACHE) $(BUILD_DIR) $(INSTALL_DIR))
 
@@ -46,7 +47,7 @@ $(INSTALL_DIR)/lib/libopenblas.so: \
 	cd $(BUILD_DIR) && unzip -q $< \
 	                && mv OpenBLAS-$(OPENBLAS_VER) openblas
 	cd $(BUILD_DIR)/openblas \
-	&& $(MAKE) BINARY=64 INTERFACE64=1 CONSISTENT_FPCSR=1 \
+	&& $(MAKE) BINARY=64 INTERFACE64=1 DYNAMIC_ARCH=1 CONSISTENT_FPCSR=1 \
 	&& $(MAKE) install PREFIX=$(INSTALL_DIR)
 
 openblas: $(INSTALL_DIR)/lib/libopenblas.so
