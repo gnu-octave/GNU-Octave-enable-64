@@ -172,6 +172,38 @@ arpack: $(INSTALL_DIR)/lib/libarpack.so
 
 ################################################################################
 #
+#   (Optional) GLPK  - https://www.gnu.org/software/glpk/
+#
+#   The GLPK library will be build from a specific version, because Debian
+#   systems make SuiteSparse a requirements for GLPK.
+#
+################################################################################
+
+GLPK_VER = 4.65
+
+$(SRC_CACHE)/glpk-$(GLPK_VER).tar.gz:
+	@echo -e "\n>>> Download GLPK <<<\n"
+	cd $(SRC_CACHE) && wget -q \
+	  "https://ftp.gnu.org/gnu/glpk/glpk-$(GLPK_VER).tar.gz"
+
+$(INSTALL_DIR)/lib/libglpk.so: \
+	$(SRC_CACHE)/glpk-$(GLPK_VER).tar.gz
+	@echo -e "\n>>> Untar to $(BUILD_DIR)/glpk <<<\n"
+	cd $(BUILD_DIR) && tar -xf $< \
+	                && mv glpk-$(GLPK_VER) glpk
+	# build and install library
+	cd $(BUILD_DIR)/glpk \
+	&& ./configure --with-gmp \
+	               --prefix=$(INSTALL_DIR) \
+	               --libdir=$(INSTALL_DIR)/lib \
+	&& $(MAKE) check \
+	&& $(MAKE) install
+
+glpk: $(INSTALL_DIR)/lib/libglpk.so
+
+
+################################################################################
+#
 #   GNU Octave  - http://www.gnu.org/software/octave/
 #
 #   Build GNU Octave using --enable-64 and all requirements.
