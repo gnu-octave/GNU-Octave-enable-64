@@ -208,8 +208,7 @@ $(INSTALL_DIR)/bin/octave-$(OCTAVE_VER): \
 	$(INSTALL_DIR)/lib/libarpack.so
 	@echo -e "\n>>> Untar to $(BUILD_DIR)/octave-$(OCTAVE_VER) <<<\n"
 	mkdir -p $(BUILD_DIR)/octave-$(OCTAVE_VER)
-	cd $(BUILD_DIR) && tar -xf $< \
-	                       -C $(BUILD_DIR)/octave-$(OCTAVE_VER) \
+	cd $(BUILD_DIR) && tar -xf $< -C octave-$(OCTAVE_VER) \
 	                       --strip-components 1
 	@echo -e "\n>>> Octave: configure (1/3) <<<\n"
 	cd $(BUILD_DIR)/octave-$(OCTAVE_VER) && ./configure $(OCTAVE_CONFIG_FLAGS)
