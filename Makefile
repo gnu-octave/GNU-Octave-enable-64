@@ -12,6 +12,12 @@ SRC_CACHE   ?= $(ROOT_DIR)/source-cache
 BUILD_DIR   ?= $(ROOT_DIR)/build
 INSTALL_DIR ?= $(ROOT_DIR)/install
 
+# specify elevated privileges command to install to INSTALL_DIR
+SUDO_INSTALL ?=
+ifeq ($(SUDO_INSTALL),1)
+SUDO_INSTALL=sudo
+endif
+
 LD_LIBRARY_PATH = $(INSTALL_DIR)/lib
 IGNORE := $(shell mkdir -p $(SRC_CACHE) $(BUILD_DIR) $(INSTALL_DIR))
 
@@ -48,7 +54,7 @@ $(INSTALL_DIR)/lib/libopenblas.so: \
 	                && mv OpenBLAS-$(OPENBLAS_VER) openblas
 	cd $(BUILD_DIR)/openblas \
 	&& $(MAKE) BINARY=64 INTERFACE64=1 DYNAMIC_ARCH=1 CONSISTENT_FPCSR=1 \
-	&& $(MAKE) install PREFIX=$(INSTALL_DIR)
+	&& $(SUDO_INSTALL) $(MAKE) install PREFIX=$(INSTALL_DIR)
 
 openblas: $(INSTALL_DIR)/lib/libopenblas.so
 
@@ -85,7 +91,7 @@ $(INSTALL_DIR)/lib/libsuitesparseconfig.so: \
 	           CHOLMOD_CONFIG=-D'LONGBLAS=long' \
 	           LDFLAGS='-L$(INSTALL_DIR)/lib -L$(BUILD_DIR)/suitesparse/lib' \
 	           CMAKE_OPTIONS=-D'CMAKE_INSTALL_PREFIX=$(INSTALL_DIR)' \
-	&& $(MAKE) install \
+	&& $(SUDO_INSTALL) $(MAKE) install \
 	           INSTALL=$(INSTALL_DIR) \
 	           INSTALL_DOC=/tmp/doc \
 	           LAPACK= \
@@ -125,8 +131,8 @@ $(INSTALL_DIR)/lib/libqrupdate.so: \
 	                && mv qrupdate-$(QRUPDATE_VER) qrupdate
 	# build and install library
 	cd $(BUILD_DIR)/qrupdate \
-	&& $(MAKE) test    $(QRUPDATE_CONFIG_FLAGS) \
-	&& $(MAKE) install $(QRUPDATE_CONFIG_FLAGS)
+	&& $(MAKE) test $(QRUPDATE_CONFIG_FLAGS) \
+	&& $(SUDO_INSTALL) $(MAKE) install $(QRUPDATE_CONFIG_FLAGS)
 
 qrupdate: $(INSTALL_DIR)/lib/libqrupdate.so
 
@@ -165,7 +171,7 @@ $(INSTALL_DIR)/lib/libarpack.so: \
 	               LT_SYS_LIBRARY_PATH=$(INSTALL_DIR)/lib \
 	               LDFLAGS='-L$(INSTALL_DIR)/lib' \
 	&& $(MAKE) check \
-	&& $(MAKE) install
+	&& $(SUDO_INSTALL) $(MAKE) install
 
 arpack: $(INSTALL_DIR)/lib/libarpack.so
 
@@ -197,7 +203,7 @@ $(INSTALL_DIR)/lib/libglpk.so: \
 	               --prefix=$(INSTALL_DIR) \
 	               --libdir=$(INSTALL_DIR)/lib \
 	&& $(MAKE) check \
-	&& $(MAKE) install
+	&& $(SUDO_INSTALL) $(MAKE) install
 
 glpk: $(INSTALL_DIR)/lib/libglpk.so
 
@@ -245,7 +251,7 @@ $(INSTALL_DIR)/bin/octave-$(OCTAVE_VER): \
 	@echo -e "\n>>> Octave: configure (1/3) <<<\n"
 	cd $(BUILD_DIR)/octave-$(OCTAVE_VER) && ./configure $(OCTAVE_CONFIG_FLAGS)
 	@echo -e "\n>>> Octave: build (2/3) <<<\n"
-	cd $(BUILD_DIR)/octave-$(OCTAVE_VER) && $(MAKE) install
+	cd $(BUILD_DIR)/octave-$(OCTAVE_VER) && $(SUDO_INSTALL) $(MAKE) install
 	@echo -e "\n>>> Octave: check (3/3) <<<\n"
 	cd $(BUILD_DIR)/octave-$(OCTAVE_VER) && $(MAKE) check \
 	                          LD_LIBRARY_PATH='$(INSTALL_DIR)/lib'
