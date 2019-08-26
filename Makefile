@@ -14,9 +14,6 @@ INSTALL_DIR ?= $(ROOT_DIR)/install
 
 # specify elevated privileges command to install to INSTALL_DIR
 SUDO_INSTALL ?=
-ifeq ($(SUDO_INSTALL),1)
-SUDO_INSTALL=sudo
-endif
 
 LD_LIBRARY_PATH = $(INSTALL_DIR)/lib
 IGNORE := $(shell mkdir -p $(SRC_CACHE) $(BUILD_DIR) $(INSTALL_DIR))

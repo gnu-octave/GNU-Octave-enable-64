@@ -51,6 +51,12 @@ building the "usual" Octave development version runs flawless.  Building
 this project requires approximately **5 GB** disc space and **1 hour**,
 depending on your system and the number of parallel jobs `make -j`.
 
+Debian like distributions (Ubuntu, ...) make SuiteSparse a dependency for
+[GLPK](https://www.gnu.org/software/glpk/).  For this reason, this Makefile
+can optionally build and install the original GLPK version by calling:
+
+    make -j2 glpk 2>&1 | tee log/build_glpk.log
+
 Using this Makefile is especially of interest, if one pursues the following
 goals:
 
@@ -58,36 +64,53 @@ goals:
 2. No collision with system libraries.
 
 Both aforementioned goals are archived by building and deploying the required
-libraries in an arbitrary directory `ROOT_DIR`.  This directory can be
-set by calling the Makefile like:
+libraries in arbitrary directories.  The following directories can be set when
+calling the Makefile:
+
+- `ROOT_DIR`    (default: current directory `pwd`)
+- `BUILD_DIR`   (default: `ROOT_DIR)/build`)
+  The build directory for each library.
+- `INSTALL_DIR` (default: `ROOT_DIR)/install`)
+  The library installation directory  `/usr` or `/usr/local`.
+  If the installation directory is a system directory, the flag
+  `SUDO_INSTALL=sudo` ensures that the installation operations are performed
+  with elevated privileges.
+- `SRC_CACHE`   (default: `ROOT_DIR/source-cache`)
+  The location for downloaded library sources.
+
+Two typical examples:
 
     make ROOT_DIR=$HOME/some/path
+
+    make BUILD_DIR=/tmp \
+         INSTALL_DIR=/usr/local SUDO_INSTALL=1 \
+         SRC_CACHE=$HOME/Downloads
 
 The internal directory structure relative to `ROOT_DIR` is:
 
     ROOT_DIR
-    |-- build          # local build directory for each library
+    |-- build          # BUILD_DIR
     |    |-- arpack
     |    |-- octave
     |    +--  ...
-    |-- install        # local installation path like `/usr` or `/usr/local`
+    |-- install        # INSTALL_DIR
     |    |-- bin
     |    |-- include
     |    +-- lib
-    +-- source-cache   # location for downloaded library sources
+    +-- source-cache   # SRC_CACHE
          |-- arpack-$(VER).tar.gz
          +--  ...
 
 All required libraries are built according to this pattern:
 
-1. Download the source code archive
-2. Extract the source code archive to the directory `ROOT_DIR/build`
+1. Download the source code archive to `SRC_CACHE`
+2. Extract the source code archive to `BUILD_DIR`
 3. Configure and build the library ensuring 64-bit indices
-4. Deploy the library in `ROOT_DIR/install`
+4. Deploy the library in `INSTALL_DIR`
 
 > **Notice:** For reducing the required disc space to **1 GB**, it is
-> possible to remove the directory `ROOT_DIR/build` entirely after a
-> successfully build of this project.
+> possible to remove the directories `BUILD_DIR` and `SRC_CACHE` entirely
+> after a successfully build of this project.
 
 For more information on the topic of building GNU Octave using large indices,
 see the [GNU Octave manual][3] or the [GNU Octave wiki][4].
