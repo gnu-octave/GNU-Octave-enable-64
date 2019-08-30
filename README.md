@@ -21,6 +21,28 @@ In case of any problems, a detailed log of all console output is saved to
 
 ## More details
 
+To illustrate the limitation this project addresses, consider the following
+Octave code, to determine the integer size of the BLAS library used by Octave:
+
+    clear all;
+    N = 2^31;
+    ## The following line requires about 8 GB of RAM!
+    a = b = ones (N, 1, "single");
+    c = a' * b
+
+If the BLAS library uses 32-bit integers, an error will be thrown:
+
+    error: integer dimension or index out of range for Fortran INTEGER type
+
+Otherwise, if the BLAS library uses **64-bit integers**, the result is:
+
+    c = 2^31 = 2147483648
+
+Note that the test case above usually requires twice the memory, if `a` and `b`
+are not assigned by `a = b = ...`.  Note further, that the data type "single"
+has a precision of about 23 binary bits.  In this particular example no
+rounding errors occur.
+
 In particular, a Makefile is provided containing all necessary information to
 compile
 
@@ -121,7 +143,7 @@ see the [GNU Octave manual][3] or the [GNU Octave wiki][4].
 This project is greatly inspired by a [blog post by Richard Calaba][7],
 who created one year ahead a [GitHub repository for GNU Octave 3.8][8].
 
-A very similar project to this one is [octave-64-bit-index-builder][9] by
+A very similar project to this one is [octave-blas64-builder][9] by
 Mike Miller.  A typical case of "I should have known earlier about it!"
 :wink:
 
@@ -198,6 +220,6 @@ references on this topic:
 [6]: http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html
 [7]: http://calaba.tumblr.com/post/107087607479/octave-64
 [8]: https://github.com/calaba/octave-3.8.2-enable-64-ubuntu-14.04
-[9]: https://bitbucket.org/mtmiller/octave-64-bit-index-builder
+[9]: https://gitlab.com/mtmiller/octave-blas64-builder
 [10]: http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html
-[11]: https://www.ibm.com/developerworks/library/l-dynamic-libraries/
+[11]: https://developer.ibm.com/tutorials/l-dynamic-libraries/
