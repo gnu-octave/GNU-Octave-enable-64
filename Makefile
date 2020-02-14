@@ -78,7 +78,8 @@ $(INSTALL_DIR)/lib/libsuitesparseconfig.so: \
 	$(INSTALL_DIR)/lib/libopenblas.so
 	@echo -e "\n>>> Untar SuiteSparse $(SUITESPARSE_VER) <<<\n"
 	cd $(BUILD_DIR) && tar -xf $< \
-	                && mv SuiteSparse suitesparse-$(SUITESPARSE_VER)
+	                && mv SuiteSparse-$(SUITESPARSE_VER) \
+	                      suitesparse-$(SUITESPARSE_VER)
 	# build and install library
 	cd $(BUILD_DIR)/suitesparse-$(SUITESPARSE_VER) \
 	&& $(MAKE) library \
