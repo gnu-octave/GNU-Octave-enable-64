@@ -168,7 +168,7 @@ $(INSTALL_DIR)/lib/libarpack.so: \
 	&& $(MAKE) check \
 	&& $(SUDO_INSTALL) $(MAKE) install
 
-arpack: $(INSTALL_DIR)/lib/libarpack.so
+arpack-ng: $(INSTALL_DIR)/lib/libarpack.so
 
 
 ################################################################################
