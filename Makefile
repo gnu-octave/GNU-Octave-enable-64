@@ -97,7 +97,11 @@ $(INSTALL_DIR)/lib/libsuitesparseconfig.so: \
 	           INSTALL_DOC=/tmp/doc \
 	           LAPACK= \
 	           BLAS=-lopenblas \
-	           LDFLAGS='-L$(INSTALL_DIR)/lib -L$(BUILD_DIR)/suitesparse/lib'
+	           LDFLAGS='-L$(INSTALL_DIR)/lib -L$(BUILD_DIR)/suitesparse/lib' \
+	           CMAKE_OPTIONS="-D'CMAKE_INSTALL_PREFIX=$(INSTALL_DIR)' \
+	                          -D'CMAKE_INSTALL_BINDIR=$(INSTALL_DIR)/bin' \
+	                          -D'CMAKE_INSTALL_LIBDIR=$(INSTALL_DIR)/lib' \
+	                          -D'CMAKE_INSTALL_INCLUDEDIR=$(INSTALL_DIR)/include'"
 
 suitesparse: $(INSTALL_DIR)/lib/libsuitesparseconfig.so
 
