@@ -46,11 +46,11 @@ rounding errors occur.
 In particular, a Makefile is provided containing all necessary information to
 compile
 
-- [OpenBLAS](http://www.openblas.net) (0.3.7),
-- [SuiteSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) (5.4.0),
+- [OpenBLAS](http://www.openblas.net) (0.3.8),
+- [SuiteSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) (5.6.0),
 - [QRUPDATE](https://sourceforge.net/projects/qrupdate/) (1.1.2),
 - [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.7.0), and
-- [GNU Octave][1] (5.1.0)
+- [GNU Octave][1] (5.2.0)
 
 using 64-bit indices.  To get a quick overview about the library dependencies,
 the following figure visualizes them top-down:  "The above requires all
