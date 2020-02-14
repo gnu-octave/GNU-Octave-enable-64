@@ -155,7 +155,8 @@ ARPACK-NG_VER = 3.7.0
 $(SRC_CACHE)/arpack-ng-$(ARPACK-NG_VER).tar.gz:
 	@echo -e "\n>>> Download ARPACK-NG $(ARPACK-NG_VER) <<<\n"
 	cd $(SRC_CACHE) && wget -q \
-	"https://github.com/opencollab/arpack-ng/archive/$(ARPACK-NG_VER).tar.gz"
+	"https://github.com/opencollab/arpack-ng/archive/$(ARPACK-NG_VER).tar.gz" \
+	                && mv $(ARPACK-NG_VER).tar.gz $@
 
 $(INSTALL_DIR)/lib/libarpack.so: \
 	$(SRC_CACHE)/arpack-ng-$(ARPACK-NG_VER).tar.gz \
