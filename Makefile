@@ -89,6 +89,9 @@ $(INSTALL_DIR)/lib/libsuitesparseconfig.so: \
 	           CHOLMOD_CONFIG=-D'LONGBLAS=long' \
 	           LDFLAGS='-L$(INSTALL_DIR)/lib -L$(BUILD_DIR)/suitesparse/lib' \
 	           CMAKE_OPTIONS=-D'CMAKE_INSTALL_PREFIX=$(INSTALL_DIR)' \
+	                         -D'CMAKE_INSTALL_BINDIR=$(INSTALL_DIR)/bin' \
+	                         -D'CMAKE_INSTALL_LIBDIR=$(INSTALL_DIR)/lib' \
+	                         -D'CMAKE_INSTALL_INCLUDEDIR=$(INSTALL_DIR)/include'
 	&& $(SUDO_INSTALL) $(MAKE) install \
 	           INSTALL=$(INSTALL_DIR) \
 	           INSTALL_DOC=/tmp/doc \
