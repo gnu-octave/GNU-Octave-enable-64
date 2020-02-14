@@ -71,7 +71,7 @@ $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz:
 	@echo -e "\n>>> Download SuiteSparse $(SUITESPARSE_VER) <<<\n"
 	cd $(SRC_CACHE) && wget -q \
 	"https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/v$(SUITESPARSE_VER).tar.gz" \
-	                && mv SuiteSparse-$(SUITESPARSE_VER).tar.gz $@
+	                && mv v$(SUITESPARSE_VER).tar.gz $@
 
 $(INSTALL_DIR)/lib/libsuitesparseconfig.so: \
 	$(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz \
