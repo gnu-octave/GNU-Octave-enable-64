@@ -36,7 +36,7 @@ clean:
 #
 ################################################################################
 
-OPENBLAS_VER = 0.3.8
+OPENBLAS_VER ?= 0.3.8
 
 $(SRC_CACHE)/openblas-$(OPENBLAS_VER).zip:
 	@echo -e "\n>>> Download OpenBLAS $(OPENBLAS_VER) <<<\n"
@@ -65,7 +65,7 @@ openblas: $(INSTALL_DIR)/lib/libopenblas.so
 #
 ################################################################################
 
-SUITESPARSE_VER = 5.6.0
+SUITESPARSE_VER ?= 5.6.0
 
 $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz:
 	@echo -e "\n>>> Download SuiteSparse $(SUITESPARSE_VER) <<<\n"
@@ -115,7 +115,7 @@ suitesparse: $(INSTALL_DIR)/lib/libsuitesparseconfig.so
 #
 ################################################################################
 
-QRUPDATE_VER = 1.1.2
+QRUPDATE_VER ?= 1.1.2
 
 QRUPDATE_CONFIG_FLAGS = \
   PREFIX=$(INSTALL_DIR) \
@@ -150,7 +150,7 @@ qrupdate: $(INSTALL_DIR)/lib/libqrupdate.so
 #
 ################################################################################
 
-ARPACK-NG_VER = 3.7.0
+ARPACK-NG_VER ?= 3.7.0
 
 $(SRC_CACHE)/arpack-ng-$(ARPACK-NG_VER).tar.gz:
 	@echo -e "\n>>> Download ARPACK-NG $(ARPACK-NG_VER) <<<\n"
@@ -188,7 +188,7 @@ arpack-ng: $(INSTALL_DIR)/lib/libarpack.so
 #
 ################################################################################
 
-GLPK_VER = 4.65
+GLPK_VER ?= 4.65
 
 $(SRC_CACHE)/glpk-$(GLPK_VER).tar.gz:
 	@echo -e "\n>>> Download GLPK $(GLPK_VER) <<<\n"
