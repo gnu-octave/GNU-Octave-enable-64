@@ -154,7 +154,7 @@ $(SRC_CACHE)/arpack-ng-$(ARPACK-NG_VER).tar.gz:
 	"https://github.com/opencollab/arpack-ng/archive/$(ARPACK-NG_VER).tar.gz"
 
 $(INSTALL_DIR)/lib/libarpack.so: \
-	$(SRC_CACHE)/arpack-ng-$(ARPACK-NG_VER).tar.gz: \
+	$(SRC_CACHE)/arpack-ng-$(ARPACK-NG_VER).tar.gz \
 	$(INSTALL_DIR)/lib/libopenblas.so
 	@echo -e "\n>>> Untar ARPACK-NG $(ARPACK-NG_VER) <<<\n"
 	cd $(BUILD_DIR) && tar -xf $<
