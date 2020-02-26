@@ -65,7 +65,7 @@ openblas: $(INSTALL_DIR)/lib/libopenblas.so
 #
 ################################################################################
 
-SUITESPARSE_VER ?= 5.6.0
+SUITESPARSE_VER ?= 5.7.1
 
 $(SRC_CACHE)/suitesparse-$(SUITESPARSE_VER).tar.gz:
 	@echo -e "\n>>> Download SuiteSparse $(SUITESPARSE_VER) <<<\n"
