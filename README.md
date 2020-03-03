@@ -46,7 +46,7 @@ rounding errors occur.
 In particular, a Makefile is provided containing all necessary information to
 compile
 
-- [OpenBLAS](http://www.openblas.net) (0.3.8),
+- [OpenBLAS](http://www.openblas.net) (0.3.9),
 - [SuiteSparse](http://faculty.cse.tamu.edu/davis/suitesparse.html) (5.7.1),
 - [QRUPDATE](https://sourceforge.net/projects/qrupdate/) (1.1.2),
 - [ARPACK-NG](https://github.com/opencollab/arpack-ng) (3.7.0), and
