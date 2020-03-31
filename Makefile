@@ -87,7 +87,7 @@ $(INSTALL_DIR)/lib/libsuitesparseconfig.so: \
 	           BLAS=-lopenblas \
 	           UMFPACK_CONFIG=-D'LONGBLAS=long' \
 	           CHOLMOD_CONFIG=-D'LONGBLAS=long' \
-	           LDFLAGS='-L$(INSTALL_DIR)/lib -L$(BUILD_DIR)/suitesparse/lib' \
+	           LDFLAGS='-L$(INSTALL_DIR)/lib -L$(BUILD_DIR)/suitesparse-$(SUITESPARSE_VER)/lib' \
 	           CMAKE_OPTIONS="-D'CMAKE_INSTALL_PREFIX=$(INSTALL_DIR)' \
 	                          -D'CMAKE_INSTALL_BINDIR=$(INSTALL_DIR)/bin' \
 	                          -D'CMAKE_INSTALL_LIBDIR=$(INSTALL_DIR)/lib' \
