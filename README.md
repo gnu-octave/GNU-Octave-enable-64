@@ -18,6 +18,12 @@ following commands:
 In case of any problems, a detailed log of all console output is saved to
 `log/build.log` this way.
 
+> **Note for Debian/Ubuntu like distributions:**  They make SuiteSparse a
+> dependency for [GLPK](https://www.gnu.org/software/glpk/).  For this reason,
+> this Makefile can optionally build and install the unaltered GLPK version by
+> calling:
+>
+>     make -j2 glpk 2>&1 | tee log/build_glpk.log
 
 ## More details
 
@@ -72,12 +78,6 @@ gfortran, ...) are properly installed on the system and, even better,
 building the "usual" Octave development version runs flawless.  Building
 this project requires approximately **5 GB** disc space and **1 hour**,
 depending on your system and the number of parallel jobs `make -j`.
-
-Debian like distributions (Ubuntu, ...) make SuiteSparse a dependency for
-[GLPK](https://www.gnu.org/software/glpk/).  For this reason, this Makefile
-can optionally build and install the original GLPK version by calling:
-
-    make -j2 glpk 2>&1 | tee log/build_glpk.log
 
 Using this Makefile is especially of interest, if one pursues the following
 goals:
