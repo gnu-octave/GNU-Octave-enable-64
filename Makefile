@@ -126,7 +126,7 @@ QRUPDATE_CONFIG_FLAGS = \
 $(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz:
 	@echo -e "\n>>> Download QRUPDATE $(QRUPDATE_VER) <<<\n"
 	cd $(SRC_CACHE) && wget -q \
-	"http://downloads.sourceforge.net/project/qrupdate/qrupdate/1.2/qrupdate-$(QRUPDATE_VER).tar.gz"
+	"http://sourceforge.net/projects/qrupdate/files/qrupdate/1.2/qrupdate-$(QRUPDATE_VER).tar.gz"
 
 $(INSTALL_DIR)/lib/libqrupdate.so: \
 	$(SRC_CACHE)/qrupdate-$(QRUPDATE_VER).tar.gz \
